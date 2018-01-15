@@ -88,7 +88,11 @@ const styles = theme => ({
   mockup: {
     textAlign: "center",
     "& img": {
-      maxWidth: "100%"
+      maxWidth: "100%",
+      display: "none"
+    },
+    "& img:first-child": {
+      display: "block"
     },
     "@media (min-width: 1024px)": {
       width: "40%",
@@ -120,37 +124,65 @@ const styles = theme => ({
   }
 });
 
-const Billboard = ({ classes }) => {
-  return (
-    <article className={classes.container}>
-      <section className={classes.texts}>
-        <span className={classes.logo}>
-          <SvgEl svg={LOGOS.MAIN} />
-        </span>
-        <header className={classes.header}>
-          <h1>
-            A vocabulary training web app for language learners like you,{" "}
-            <em>declared</em> <strong>visual learners</strong>.
-          </h1>
-          <h2>
-            If you are a visual learner type the app is definitely for you
-          </h2>
-        </header>
-        <div className={classes.actionForDesktop}>
-          <DemoLink />
-        </div>
-      </section>
-      <section className={classes.mockup}>
-        <img
-          src="/img/phone-perspective.png"
-          alt="Lazywill on a smartphone screen"
-        />
-        <div className={classes.actionForMobile}>
-          <DemoLink />
-        </div>
-      </section>
-    </article>
-  );
-};
+class Billboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mockupInPerspective: true
+    };
+
+    this.handleMouseMove = this.handleMouseMove.bind(this);
+  }
+
+  handleMouseMove(e) {
+    this.setState(prevState => ({
+      mockupInPerspective: !prevState.mockupInPerspective
+    }));
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { mockupInPerspective } = this.state;
+
+    return (
+      <article className={classes.container}>
+        <section className={classes.texts}>
+          <span className={classes.logo}>
+            <SvgEl svg={LOGOS.MAIN} />
+          </span>
+          <header className={classes.header}>
+            <h1>
+              A vocabulary training web app for language learners like you,{" "}
+              <em>declared</em> <strong>visual learners</strong>.
+            </h1>
+            <h2>
+              If you are a visual learner type the app is definitely for you
+            </h2>
+          </header>
+          <div className={classes.actionForDesktop}>
+            <DemoLink />
+          </div>
+        </section>
+        <section className={classes.mockup}>
+          <img
+            style={{ display: mockupInPerspective ? "inline-block" : "none" }}
+            src="/img/phone-perspective.png"
+            alt="Lazywill on a smartphone in perspective"
+            onClick={this.handleMouseMove}
+          />
+          <img
+            style={{ display: mockupInPerspective ? "none" : "inline-block" }}
+            src="/img/phone.png"
+            alt="Lazywill on a smartphone"
+            onClick={this.handleMouseMove}
+          />
+          <div className={classes.actionForMobile}>
+            <DemoLink />
+          </div>
+        </section>
+      </article>
+    );
+  }
+}
 
 export default injectSheet(styles)(Billboard);
