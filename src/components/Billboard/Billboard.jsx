@@ -86,26 +86,32 @@ const styles = theme => ({
     }
   },
   mockup: {
+    //background: "blue",
     textAlign: "center",
+    position: "relative",
     "& img": {
       maxWidth: "100%",
-      display: "none"
+      transition: "all .5s"
     },
-    "& img:first-child": {
-      display: "block"
+    "& img:last-child": {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)"
     },
     "@media (min-width: 1024px)": {
-      width: "40%",
-      paddingRight: "5%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      width: "35%",
       "& img": {
         maxHeight: "calc(100vh - 50px)",
-        width: "auto"
+        width: "auto",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)"
       }
     }
   },
+
   actionForDesktop: {
     margin: "2em 0 0 0",
     display: "none",
@@ -115,6 +121,7 @@ const styles = theme => ({
   },
   actionForMobile: {
     padding: "0 0 3em",
+    textAlign: "center",
     "@media (min-width: 1024px)": {
       display: "none"
     },
@@ -135,6 +142,9 @@ class Billboard extends React.Component {
   }
 
   handleMouseMove(e) {
+    if (e.type === "mouseleave" && this.state.mockupInPerspective) {
+      return;
+    }
     this.setState(prevState => ({
       mockupInPerspective: !prevState.mockupInPerspective
     }));
@@ -165,20 +175,21 @@ class Billboard extends React.Component {
         </section>
         <section className={classes.mockup}>
           <img
-            style={{ display: mockupInPerspective ? "inline-block" : "none" }}
+            style={{ opacity: mockupInPerspective ? 1 : 0 }}
             src="/img/phone-perspective.png"
             alt="Lazywill on a smartphone in perspective"
-            onClick={this.handleMouseMove}
           />
           <img
-            style={{ display: mockupInPerspective ? "none" : "inline-block" }}
+            style={{ opacity: mockupInPerspective ? 0 : 1 }}
             src="/img/phone.png"
             alt="Lazywill on a smartphone"
+            onMouseEnter={this.handleMouseMove}
+            onMouseLeave={this.handleMouseMove}
             onClick={this.handleMouseMove}
           />
-          <div className={classes.actionForMobile}>
-            <DemoLink />
-          </div>
+        </section>
+        <section className={classes.actionForMobile}>
+          <DemoLink />
         </section>
       </article>
     );

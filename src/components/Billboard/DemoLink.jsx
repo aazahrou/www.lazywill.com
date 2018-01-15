@@ -9,7 +9,7 @@ import Button from "material-ui/Button";
 const styles = theme => ({
   root: {
     display: "block",
-    borderRadius: 0,
+    borderRadius: "2px",
     background: theme.main.green,
     border: 0,
     boxShadow: "none",
