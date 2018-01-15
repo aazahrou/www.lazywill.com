@@ -3,7 +3,7 @@ import { withStyles } from "material-ui/styles";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-import PhoneLink from "material-ui-icons/PhoneLink";
+import Phonelink from "material-ui-icons/Phonelink";
 import Button from "material-ui/Button";
 
 const styles = theme => ({
@@ -41,7 +41,7 @@ const BlockButton = props => {
       onClick={onClick}
       classes={{ root: classes.root, label: classes.label }}
     >
-      Try demo&nbsp; <PhoneLink />
+      Try demo&nbsp; <Phonelink />
     </Button>
   );
 };
