@@ -1,6 +1,6 @@
 import React from "react";
 import Helmet from "react-helmet";
-import config from "../../../utils/config";
+import config from "../../../../utils/config";
 
 class SEO extends React.Component {
   render() {

@@ -57,11 +57,46 @@ const Footer = ({ classes }) => {
       </div>
       <div className={classes.column}>
         <span>
-          Built with <a href="">React</a> & <a href="">Gatsby</a>
+          Built with{" "}
+          <a href="https://reactjs.org/" target="_blank">
+            React
+          </a>{" "}
+          &{" "}
+          <a href="https://www.gatsbyjs.org/" target="_blank">
+            Gatsby
+          </a>
         </span>{" "}
         <b>|</b>{" "}
         <span>
-          Hosted on <a href="">Netlify</a>
+          Hosted on{" "}
+          <a href="https://www.netlify.com/" target="_blank" rel="noopener">
+            Netlify
+          </a>
+        </span>
+        <b>|</b>{" "}
+        <span>
+          Credist:{" "}
+          <a
+            href="https://www.flickr.com/photos/22746515@N02/7525640086/"
+            target="_blank"
+            rel="noopener"
+          >
+            Picture
+          </a>,{" "}
+          <a
+            href="http://creativecrunk.com/google-pixel-psd-mockup/"
+            target="_blank"
+            rel="noopener"
+          >
+            Phone
+          </a>{" "}
+          <a
+            href="http://creativecrunk.com/google-pixel-psd-mockup-2/"
+            target="_blank"
+            rel="noopener"
+          >
+            Mockups
+          </a>
         </span>
       </div>
     </footer>

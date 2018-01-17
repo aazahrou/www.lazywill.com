@@ -1,9 +1,7 @@
-const config = require("./src/utils/config");
+const config = require("./utils/config");
 
 module.exports = {
   plugins: [
-    `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-jss`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -27,6 +25,8 @@ module.exports = {
         ]
       }
     },
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-jss`,
     `gatsby-plugin-netlify`,
     `gatsby-plugin-offline`,
     {

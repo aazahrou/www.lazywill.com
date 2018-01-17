@@ -1,4 +1,4 @@
-const colors = require("../styles/colors");
+const colors = require("../src/styles/colors");
 
 module.exports = {
   pathPrefix: "/",
@@ -13,8 +13,8 @@ module.exports = {
   manifestName: "Lazywill - vocabulary training",
   manifestShortName: "Lazywill",
   manifestStartUrl: "/",
-  manifestBackgroundColor: colors.first,
-  manifestThemeColor: colors.firstLight,
+  manifestBackgroundColor: colors.bg,
+  manifestThemeColor: colors.bg,
   manifestDisplay: "standalone",
   // analytics
   analyticsTrackingId: ""

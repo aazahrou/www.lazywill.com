@@ -1,6 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
-const config = require("../utils/config");
+const config = require("../../utils/config");
 
 import Billboard from "../components/Billboard/";
 import Footer from "../components/Footer/";
