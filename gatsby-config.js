@@ -1,4 +1,4 @@
-const config = require("./src/utils/siteConfig");
+const config = require("./src/utils/config");
 
 module.exports = {
   plugins: [

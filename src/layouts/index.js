@@ -6,6 +6,7 @@ import { MuiThemeProvider } from "material-ui/styles";
 import theme from "../styles/theme";
 import normalize from "normalize-jss";
 import globals from "../styles/globals";
+import SEO from "../components/shared/SEO";
 
 class Template extends React.Component {
   constructor(props) {
@@ -18,9 +19,7 @@ class Template extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div>
-          <Helmet>
-            <html lang="en" />
-          </Helmet>
+          <SEO />
           {children()}
         </div>
       </MuiThemeProvider>

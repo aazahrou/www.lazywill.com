@@ -2,7 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 
 import SvgEl from "../shared/SvgEl";
-import { LOGOS } from "../../constants/logos";
+import { LOGOS } from "../../utils/logos";
 import DemoLink from "./DemoLink";
 
 const styles = theme => ({
