@@ -142,6 +142,7 @@ class Billboard extends React.Component {
   }
 
   handleMouseClick(e) {
+    console.log("adsfadsf");
     document.location.href = "https://demo.lazywill.com";
   }
 
@@ -174,7 +175,7 @@ class Billboard extends React.Component {
             </h2>
           </header>
           <div className={classes.actionForDesktop}>
-            <DemoLink />
+            <DemoLink onClick={this.handleMouseClick} />
           </div>
         </section>
         <section className={classes.mockup}>
