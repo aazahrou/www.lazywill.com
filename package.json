@@ -20,7 +20,8 @@
     "material-ui": "^1.0.0-beta.27",
     "material-ui-icons": "^1.0.0-beta.17",
     "normalize-jss": "^4.0.0",
-    "react-obfuscate": "^1.3.0"
+    "react-obfuscate": "^1.3.0",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "gatsby-link": "^1.6.34"

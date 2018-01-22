@@ -2,18 +2,21 @@ import theme from "./theme";
 
 const globals = {
   "@global": {
-    "*": {
-      boxSizing: "border-box"
-    },
     html: {
+      boxSizing: "border-box",
       "-webkit-text-size-adjust": "100%",
       "-moz-text-size-adjust": "none",
-      "-ms-text-size-adjust": "100%"
-    },
-    body: {
+      "-ms-text-size-adjust": "100%",
       fontFamily: `"-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "sans-serif"`,
       background: "#D0E0D8"
     },
+    "html.wf-active": {
+      fontFamily: "Open Sans"
+    },
+    "*, *:before, *:after": {
+      boxSizing: "inherit"
+    },
+    body: {},
     a: {
       borderBottom: "1px solid #990000",
       color: "#990000",

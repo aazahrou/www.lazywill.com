@@ -17,5 +17,5 @@ module.exports = {
   manifestThemeColor: colors.bg,
   manifestDisplay: "standalone",
   // analytics
-  analyticsTrackingId: ""
+  analyticsTrackingId: "UA-82862651-1"
 };

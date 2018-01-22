@@ -58,11 +58,11 @@ const Footer = ({ classes }) => {
       <div className={classes.column}>
         <span>
           Built with{" "}
-          <a href="https://reactjs.org/" target="_blank">
+          <a href="https://reactjs.org/" target="_blank" rel="noopener">
             React
           </a>{" "}
           &{" "}
-          <a href="https://www.gatsbyjs.org/" target="_blank">
+          <a href="https://www.gatsbyjs.org/" target="_blank" rel="noopener">
             Gatsby
           </a>
         </span>{" "}

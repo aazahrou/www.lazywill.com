@@ -86,7 +86,6 @@ const styles = theme => ({
     }
   },
   mockup: {
-    //background: "blue",
     textAlign: "center",
     position: "relative",
     "& img": {
@@ -138,7 +137,12 @@ class Billboard extends React.Component {
       mockupInPerspective: true
     };
 
+    this.handleMouseClick = this.handleMouseClick.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
+  }
+
+  handleMouseClick(e) {
+    document.location.href = "https://demo.lazywill.com";
   }
 
   handleMouseMove(e) {
@@ -189,7 +193,7 @@ class Billboard extends React.Component {
           />
         </section>
         <section className={classes.actionForMobile}>
-          <DemoLink />
+          <DemoLink onClick={this.handleMouseClick} />
         </section>
       </article>
     );
