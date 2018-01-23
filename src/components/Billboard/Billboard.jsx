@@ -142,8 +142,15 @@ class Billboard extends React.Component {
   }
 
   handleMouseClick(e) {
-    console.log("adsfadsf");
-    document.location.href = "https://demo.lazywill.com";
+    window.ga("send", {
+      hitType: "event",
+      eventCategory: "cta",
+      eventAction: "click",
+      eventLabel: "Try Demo"
+    });
+    setTimeout(() => {
+      document.location.href = "https://demo.lazywill.com";
+    }, 100);
   }
 
   handleMouseMove(e) {
