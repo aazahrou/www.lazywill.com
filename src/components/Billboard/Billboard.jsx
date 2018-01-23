@@ -58,9 +58,6 @@ const styles = theme => ({
       },
       "@media (min-width: 1024px)": {
         fontSize: "2.4em"
-      },
-      "& strong": {
-        fontWeight: 700
       }
     },
     "& h2": {
@@ -73,11 +70,14 @@ const styles = theme => ({
     },
     "& em": {
       fontStyle: "normal",
-      color: theme.main.green
+      color: theme.main.green,
+      letterSpacing: "-.03em",
+      fontWeight: 400
     },
     "& strong": {
       color: theme.main.blue,
-      letterSpacing: "-.03em"
+      letterSpacing: "-.02em",
+      fontWeight: 700
     },
     "@media (min-width: 1024px)": {
       "& h1": {
@@ -150,9 +150,10 @@ class Billboard extends React.Component {
         eventLabel: "Try Demo"
       });
     }
+
     setTimeout(() => {
       document.location.href = "https://demo.lazywill.com";
-    }, 100);
+    }, 200);
   }
 
   handleMouseMove(e) {
