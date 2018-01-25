@@ -3,6 +3,15 @@ const config = require("./utils/config");
 module.exports = {
   plugins: [
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/src/images`
+      }
+    },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: config.siteTitle,

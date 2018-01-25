@@ -92,7 +92,7 @@ const styles = theme => ({
       maxWidth: "100%",
       transition: "all .5s"
     },
-    "& img:last-child": {
+    "& img": {
       position: "absolute",
       top: "50%",
       left: "50%",
@@ -110,7 +110,19 @@ const styles = theme => ({
       }
     }
   },
-
+  justle: {
+    width: "300px",
+    height: "580px",
+    position: "relative",
+    margin: "0 auto",
+    "@media (min-width: 600px)": {
+      width: "400px",
+      height: "760px"
+    },
+    "@media (min-width: 1024px)": {
+      display: "none"
+    }
+  },
   actionForDesktop: {
     margin: "2em 0 0 0",
     display: "none",
@@ -165,6 +177,22 @@ class Billboard extends React.Component {
     }));
   }
 
+  getImageSrc(params) {
+    const { width, type, version } = params;
+    const data = this.props.data;
+
+    const fileType = type ? type.toUpperCase() : "PNG";
+    const imgWidth = width ? width.toString() : "300";
+    const fileName =
+      version === "perspective" ? "phone-perspective.png" : "phone.png";
+
+    return data[`phone${fileType}${imgWidth}`].edges.find(
+      el =>
+        el.node.resize.originalName ===
+        (version === "perspective" ? "phone-perspective.png" : "phone.png")
+    ).node.resize.src;
+  }
+
   render() {
     const { classes } = this.props;
     const { mockupInPerspective } = this.state;
@@ -189,19 +217,80 @@ class Billboard extends React.Component {
           </div>
         </section>
         <section className={classes.mockup}>
-          <img
-            style={{ opacity: mockupInPerspective ? 1 : 0 }}
-            src="/img/phone-perspective.png"
-            alt="Lazywill on a smartphone in perspective"
-          />
-          <img
-            style={{ opacity: mockupInPerspective ? 0 : 1 }}
-            src="/img/phone.png"
-            alt="Lazywill on a smartphone"
-            onMouseEnter={this.handleMouseMove}
-            onMouseLeave={this.handleMouseMove}
-            onClick={this.handleMouseMove}
-          />
+          <div className={classes.justle} />
+          <picture>
+            <source
+              type="image/webp"
+              media="(min-width: 1024px)"
+              srcSet={this.getImageSrc({
+                width: 500,
+                type: "webp",
+                version: "perspective"
+              })}
+            />
+            <source
+              media="(min-width: 1024px)"
+              srcSet={this.getImageSrc({ width: 500, version: "perspective" })}
+            />
+            <source
+              type="image/webp"
+              media="(min-width: 600px)"
+              srcSet={this.getImageSrc({
+                width: 400,
+                type: "webp",
+                version: "perspective"
+              })}
+            />
+            <source
+              media="(min-width: 600px)"
+              srcSet={this.getImageSrc({ width: 400, version: "perspective" })}
+            />
+            <source
+              type="image/webp"
+              srcSet={this.getImageSrc({
+                width: 300,
+                type: "webp",
+                version: "perspective"
+              })}
+            />
+            <img
+              src={this.getImageSrc({ width: 300, version: "perspective" })}
+              alt="Lazywill on a smartphone in perspective"
+              style={{ opacity: mockupInPerspective ? 1 : 0 }}
+            />
+          </picture>
+          <picture>
+            <source
+              type="image/webp"
+              media="(min-width: 1024px)"
+              srcSet={this.getImageSrc({ width: 500, type: "webp" })}
+            />
+            <source
+              media="(min-width: 1024px)"
+              srcSet={this.getImageSrc({ width: 500 })}
+            />
+            <source
+              type="image/webp"
+              media="(min-width: 600px)"
+              srcSet={this.getImageSrc({ width: 400, type: "webp" })}
+            />
+            <source
+              media="(min-width: 600px)"
+              srcSet={this.getImageSrc({ width: 400 })}
+            />
+            <source
+              type="image/webp"
+              srcSet={this.getImageSrc({ width: 300, type: "webp" })}
+            />
+            <img
+              style={{ opacity: mockupInPerspective ? 0 : 1 }}
+              src={this.getImageSrc({ width: 300 })}
+              alt="Lazywill on a smartphone"
+              onMouseEnter={this.handleMouseMove}
+              onMouseLeave={this.handleMouseMove}
+              onClick={this.handleMouseMove}
+            />
+          </picture>
         </section>
         <section className={classes.actionForMobile}>
           <DemoLink onClick={this.handleMouseClick} />
