@@ -1,5 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
+import "mdn-polyfills/Array.prototype.find";
 
 import SvgEl from "../shared/SvgEl";
 import { LOGOS } from "../../../utils/logos";
