@@ -2,6 +2,7 @@ const colors = require("../src/styles/colors");
 
 module.exports = {
   pathPrefix: "/",
+  appName: "Lazywill",
   siteTitle: "Lazywill - a vocabulary training app for language learners",
   siteUrl: "https://gsbs.greglobinski.com",
   siteLanguage: "en",

@@ -14,7 +14,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: config.siteTitle,
+        name: config.manifestName,
         short_name: config.manifestShortName,
         start_url: config.manifestStartUrl,
         background_color: config.manifestBackgroundColor,
