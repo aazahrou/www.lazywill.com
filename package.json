@@ -7,17 +7,43 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "icon512": "sharp -i ./static/icons/icon.png -o ./static/icons/icon-512x512.png resize 512",
-    "icon384": "sharp -i ./static/icons/icon.png -o ./static/icons/icon-384x384.png resize 384",
-    "icon256": "sharp -i ./static/icons/icon.png -o ./static/icons/icon-256x256.png resize 256",
-    "icon192": "sharp -i ./static/icons/icon.png -o ./static/icons/icon-192x192.png resize 192",
-    "icon144": "sharp -i ./static/icons/icon.png -o ./static/icons/icon-144x144.png resize 144",
-    "icon96": "sharp -i ./static/icons/icon.png -o ./static/icons/icon-96x96.png resize 96",
-    "icon48": "sharp -i ./static/icons/icon.png -o ./static/icons/icon-48x48.png resize 48",
-    "generate-manifest-icons": "yarn icon512 && yarn icon384 && yarn icon256 && yarn icon192 && yarn icon144 && yarn icon96 && yarn icon48"
+    "icon512":
+      "sharp -i ./static/icons/icon.png -o ./static/icons/icon-512x512.png resize 512",
+    "icon384":
+      "sharp -i ./static/icons/icon.png -o ./static/icons/icon-384x384.png resize 384",
+    "icon256":
+      "sharp -i ./static/icons/icon.png -o ./static/icons/icon-256x256.png resize 256",
+    "icon192":
+      "sharp -i ./static/icons/icon.png -o ./static/icons/icon-192x192.png resize 192",
+    "icon144":
+      "sharp -i ./static/icons/icon.png -o ./static/icons/icon-144x144.png resize 144",
+    "icon96":
+      "sharp -i ./static/icons/icon.png -o ./static/icons/icon-96x96.png resize 96",
+    "icon48":
+      "sharp -i ./static/icons/icon.png -o ./static/icons/icon-48x48.png resize 48",
+    "appleIcon180":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-180x180.png resize 180",
+    "appleIcon152":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-152x152.png resize 152",
+    "appleIcon144":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-144x144.png resize 144",
+    "appleIcon120":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-120x120.png resize 120",
+    "appleIcon114":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-114x114.png resize 114",
+    "appleIcon76":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-76x76.png resize 76",
+    "appleIcon72":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-72x72.png resize 72",
+    "appleIcon60":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-60x60.png resize 60",
+    "appleIcon57":
+      "sharp -i ./static/icons/apple-icon.png -o ./static/icons/apple-icon-57x57.png resize 57",
+    "generate-manifest-icons":
+      "yarn icon512 && yarn icon384 && yarn icon256 && yarn icon192 && yarn icon144 && yarn icon96 && yarn icon48 && yarn appleIcon180 && yarn appleIcon152 && yarn appleIcon144 && yarn appleIcon120 && yarn appleIcon114 && yarn appleIcon76 && yarn appleIcon72 && yarn appleIcon60 && yarn appleIcon57"
   },
   "dependencies": {
-    "gatsby": "^1.9.110",
+    "gatsby": "^1.9.169",
     "gatsby-plugin-google-analytics": "^1.0.13",
     "gatsby-plugin-jss": "^1.5.9",
     "gatsby-plugin-manifest": "^1.0.8",
