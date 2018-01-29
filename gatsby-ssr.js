@@ -1,7 +1,36 @@
 import React from "react";
+import { JssProvider, SheetsRegistry } from "react-jss";
+import { renderToString } from "react-dom/server";
+import { default as minifyCssString } from "minify-css-string";
 
-exports.onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
-  return setPostBodyComponents([
+exports.replaceRenderer = ({
+  bodyComponent,
+  replaceBodyHTMLString,
+  setHeadComponents
+}) => {
+  const sheets = new SheetsRegistry();
+
+  replaceBodyHTMLString(
+    renderToString(<JssProvider registry={sheets}>{bodyComponent}</JssProvider>)
+  );
+
+  setHeadComponents([
+    <style
+      type="text/css"
+      id="server-side-jss"
+      key="server-side-jss"
+      dangerouslySetInnerHTML={{ __html: minifyCssString(sheets.toString()) }}
+    />
+  ]);
+};
+
+exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
+  return setHeadComponents([
+    <link
+      key={`webfontsloader-dnsprefetch`}
+      rel="dns-prefetch"
+      href="//ajax.googleapis.com/"
+    />,
     <script
       key={`webfontsloader`}
       src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
