@@ -56,7 +56,7 @@ class Index extends React.Component {
               type="image/webp"
               srcSet={this.props.data.background500Webp.resize.src}
             />
-            <img src={this.props.data.background500.resize.src} />
+            <img src={this.props.data.background500.resize.src} alt="" />
           </picture>
         </div>
         <Billboard data={this.props.data} />

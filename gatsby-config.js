@@ -61,7 +61,6 @@ module.exports = {
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-jss`,
-    `gatsby-plugin-netlify`,
     `gatsby-plugin-offline`,
     {
       resolve: `gatsby-plugin-google-analytics`,
