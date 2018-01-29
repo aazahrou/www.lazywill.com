@@ -9,9 +9,20 @@ const styles = theme => ({
   main: {
     width: "100%",
     minHeight: "100vh",
-    background: "#D0E0D8",
-    backgroundImage: 'url("/img/background-bright.jpg")',
-    backgroundPosition: "left bottom"
+    position: "relative"
+  },
+  bg: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    overflow: "hidden",
+    zIndex: "-1",
+    "& img": {
+      width: "100%",
+      height: "100%"
+    }
   }
 });
 
@@ -21,6 +32,33 @@ class Index extends React.Component {
 
     return (
       <div className={classes.main}>
+        <div className={classes.bg}>
+          <picture>
+            <source
+              type="image/webp"
+              media="(min-width: 1024px)"
+              srcSet={this.props.data.background2000Webp.resize.src}
+            />
+            <source
+              media="(min-width: 1024px)"
+              srcSet={this.props.data.background2000.resize.src}
+            />
+            <source
+              type="image/webp"
+              media="(min-width: 600px)"
+              srcSet={this.props.data.background1000Webp.resize.src}
+            />
+            <source
+              media="(min-width: 600px)"
+              srcSet={this.props.data.background1000.resize.src}
+            />
+            <source
+              type="image/webp"
+              srcSet={this.props.data.background500Webp.resize.src}
+            />
+            <img src={this.props.data.background500.resize.src} />
+          </picture>
+        </div>
         <Billboard data={this.props.data} />
         <Footer />
       </div>
@@ -32,201 +70,110 @@ export default injectSheet(styles)(Index);
 
 export const pageQuery = graphql`
   query IndexQuery {
-    phonePNG300: allImageSharp(
+    phone300: allImageSharp(
       filter: { id: { regex: "/phone(-perspective)*.png/" } }
     ) {
       edges {
         node {
           ... on ImageSharp {
-            resize(width: 300, toFormat: PNG) {
+            resolutions(toFormat: PNG, width: 300, quality: 90) {
+              width
+              height
               src
-              aspectRatio
+              srcSet
+              srcWebp
+              srcSetWebp
               originalName
             }
           }
         }
       }
     }
-    phonePNG400: allImageSharp(
+    phone400: allImageSharp(
       filter: { id: { regex: "/phone(-perspective)*.png/" } }
     ) {
       edges {
         node {
           ... on ImageSharp {
-            resize(width: 400, toFormat: PNG) {
+            resolutions(toFormat: PNG, width: 400, quality: 90) {
+              width
+              height
               src
-              aspectRatio
+              srcSet
+              srcWebp
+              srcSetWebp
               originalName
             }
           }
         }
       }
     }
-    phonePNG500: allImageSharp(
+    phone500: allImageSharp(
       filter: { id: { regex: "/phone(-perspective)*.png/" } }
     ) {
       edges {
         node {
           ... on ImageSharp {
-            resize(width: 500, toFormat: PNG) {
+            resolutions(toFormat: PNG, width: 500, quality: 90) {
+              width
+              height
               src
-              aspectRatio
+              srcSet
+              srcWebp
+              srcSetWebp
               originalName
             }
           }
         }
       }
     }
-    phoneWEBP300: allImageSharp(
-      filter: { id: { regex: "/phone(-perspective)*.png/" } }
-    ) {
-      edges {
-        node {
-          ... on ImageSharp {
-            resize(width: 300, toFormat: WEBP, quality: 90) {
-              src
-              aspectRatio
-              originalName
-            }
-          }
-        }
+    background500: imageSharp(id: { regex: "/background.jpg/" }) {
+      resize(width: 500, height: 1500, quality: 90, cropFocus: SOUTHWEST) {
+        src
       }
     }
-    phoneWEBP400: allImageSharp(
-      filter: { id: { regex: "/phone(-perspective)*.png/" } }
-    ) {
-      edges {
-        node {
-          ... on ImageSharp {
-            resize(width: 400, toFormat: WEBP, quality: 90) {
-              src
-              aspectRatio
-              originalName
-            }
-          }
-        }
+    background1000: imageSharp(id: { regex: "/background.jpg/" }) {
+      resize(width: 1000, height: 1500, quality: 90, cropFocus: SOUTHWEST) {
+        src
       }
     }
-    phoneWEBP500: allImageSharp(
-      filter: { id: { regex: "/phone(-perspective)*.png/" } }
-    ) {
-      edges {
-        node {
-          ... on ImageSharp {
-            resize(width: 500, toFormat: WEBP, quality: 90) {
-              src
-              aspectRatio
-              originalName
-            }
-          }
-        }
+    background2000: imageSharp(id: { regex: "/background.jpg/" }) {
+      resize(width: 2000, height: 1500, quality: 90, cropFocus: SOUTHWEST) {
+        src
+      }
+    }
+    background500Webp: imageSharp(id: { regex: "/background.jpg/" }) {
+      resize(
+        width: 500
+        height: 1500
+        toFormat: WEBP
+        quality: 90
+        cropFocus: SOUTHWEST
+      ) {
+        src
+      }
+    }
+    background1000Webp: imageSharp(id: { regex: "/background.jpg/" }) {
+      resize(
+        width: 1000
+        height: 1500
+        toFormat: WEBP
+        quality: 90
+        cropFocus: SOUTHWEST
+      ) {
+        src
+      }
+    }
+    background2000Webp: imageSharp(id: { regex: "/background.jpg/" }) {
+      resize(
+        width: 2000
+        height: 1500
+        toFormat: WEBP
+        quality: 90
+        cropFocus: SOUTHWEST
+      ) {
+        src
       }
     }
   }
 `;
-
-// export const pageQuery2 = graphql`
-//   query IndexQuery2 {
-//     phonePNG300: imageSharp(id: { regex: "/phone.png/" }) {
-//       resize(width: 301, toFormat: PNG) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phonePNG400: imageSharp(id: { regex: "/phone.png/" }) {
-//       resize(width: 400, toFormat: PNG) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phonePNG500: imageSharp(id: { regex: "/phone.png/" }) {
-//       resize(width: 500, toFormat: PNG) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phoneWEBP300: imageSharp(id: { regex: "/phone.png/" }) {
-//       resize(width: 300, toFormat: WEBP, quality: 90) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phoneWEBP400: imageSharp(id: { regex: "/phone.png/" }) {
-//       resize(width: 400, toFormat: WEBP, quality: 90) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phoneJPEG500: imageSharp(id: { regex: "/phone.png/" }) {
-//       resize(width: 500, toFormat: WEBP, quality: 90) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//   }
-// `;
-
-// export const pageQuery3 = graphql`
-//   query IndexQuery3 {
-//     phonePerspectivePNG300: imageSharp(
-//       id: { regex: "/phone-perspective.png/" }
-//     ) {
-//       resize(width: 300, toFormat: PNG) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phonePerspectivePNG400: imageSharp(
-//       id: { regex: "/phone-perspective.png/" }
-//     ) {
-//       resize(width: 400, toFormat: PNG) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phonePerspectivePNG500: imageSharp(
-//       id: { regex: "/phone-perspective.png/" }
-//     ) {
-//       resize(width: 500, toFormat: PNG) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phonePerspectiveeWEBP300: imageSharp(
-//       id: { regex: "/phone-perspective.png/" }
-//     ) {
-//       resize(width: 300, toFormat: WEBP, quality: 90) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phonePerspectiveWEBP400: imageSharp(
-//       id: { regex: "/phone-perspective.png/" }
-//     ) {
-//       resize(width: 400, toFormat: WEBP, quality: 90) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//     phonePerspectiveJPEG500: imageSharp(
-//       id: { regex: "/phone-perspective.png/" }
-//     ) {
-//       resize(width: 500, toFormat: WEBP, quality: 90) {
-//         src
-//         aspectRatio
-//       }
-//     }
-//   }
-// `;
-
-// allImageSharp {
-//   edges {
-//     node {
-//       ... on ImageSharp {
-//         resize(width: 125, height: 125, rotate: 180) {
-//           src
-//         }
-//       }
-//     }
-//   }
-// }

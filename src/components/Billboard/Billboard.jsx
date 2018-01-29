@@ -147,11 +147,98 @@ class Billboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mockupInPerspective: true
+      mockupInPerspective: true,
+      phonePerspective500SrcSet: null,
+      phonePerspective400SrcSet: null,
+      phonePerspective300SrcSet: null,
+      phonePerspective300Src: null,
+      phonePerspective500WebpSrcSet: null,
+      phonePerspective400WebpSrcSet: null,
+      phonePerspective300WebpSrcSet: null,
+      phone500SrcSet: true,
+      phone400SrcSet: null,
+      phone300SrcSet: null,
+      phone300Src: null,
+      phone500WebpSrcSet: null,
+      phone400WebpSrcSet: null,
+      phone300WebpSrcSet: null
     };
 
     this.handleMouseClick = this.handleMouseClick.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      phonePerspective500SrcSet: this.getImageSrc({
+        width: 500,
+        version: "perspective",
+        srcSet: true
+      }),
+      phonePerspective400SrcSet: this.getImageSrc({
+        width: 400,
+        version: "perspective",
+        srcSet: true
+      }),
+      phonePerspective300SrcSet: this.getImageSrc({
+        width: 300,
+        version: "perspective",
+        srcSet: true
+      }),
+      phonePerspective300Src: this.getImageSrc({
+        width: 300,
+        version: "perspective"
+      }),
+      phonePerspective500WebpSrcSet: this.getImageSrc({
+        width: 500,
+        type: "webp",
+        version: "perspective",
+        srcSet: true
+      }),
+      phonePerspective400WebpSrcSet: this.getImageSrc({
+        width: 400,
+        type: "webp",
+        version: "perspective",
+        srcSet: true
+      }),
+      phonePerspective300WebpSrcSet: this.getImageSrc({
+        width: 300,
+        type: "webp",
+        version: "perspective",
+        srcSet: true
+      }),
+
+      phone500SrcSet: this.getImageSrc({
+        width: 500,
+        srcSet: true
+      }),
+      phone400SrcSet: this.getImageSrc({
+        width: 400,
+        srcSet: true
+      }),
+      phone300SrcSet: this.getImageSrc({
+        width: 300,
+        srcSet: true
+      }),
+      phone300Src: this.getImageSrc({
+        width: 300
+      }),
+      phone500WebpSrcSet: this.getImageSrc({
+        width: 500,
+        type: "webp",
+        srcSet: true
+      }),
+      phone400WebpSrcSet: this.getImageSrc({
+        width: 400,
+        type: "webp",
+        srcSet: true
+      }),
+      phone300WebpSrcSet: this.getImageSrc({
+        width: 300,
+        type: "webp",
+        srcSet: true
+      })
+    });
   }
 
   handleMouseClick(e) {
@@ -179,19 +266,20 @@ class Billboard extends React.Component {
   }
 
   getImageSrc(params) {
-    const { width, type, version } = params;
+    const { width, type, version, srcSet } = params;
     const data = this.props.data;
 
-    const fileType = type ? type.toUpperCase() : "PNG";
+    const srcType = srcSet ? "srcSet" : "src";
+    const fileType = type === "webp" ? "Webp" : "";
     const imgWidth = width ? width.toString() : "300";
     const fileName =
       version === "perspective" ? "phone-perspective.png" : "phone.png";
 
-    return data[`phone${fileType}${imgWidth}`].edges.find(
+    return data[`phone${imgWidth}`].edges.find(
       el =>
-        el.node.resize.originalName ===
+        el.node.resolutions.originalName ===
         (version === "perspective" ? "phone-perspective.png" : "phone.png")
-    ).node.resize.src;
+    ).node.resolutions[`${srcType}${fileType}`];
   }
 
   render() {
@@ -223,39 +311,28 @@ class Billboard extends React.Component {
             <source
               type="image/webp"
               media="(min-width: 1024px)"
-              srcSet={this.getImageSrc({
-                width: 500,
-                type: "webp",
-                version: "perspective"
-              })}
+              srcSet={this.state.phonePerspective500WebpSrcSet}
             />
             <source
               media="(min-width: 1024px)"
-              srcSet={this.getImageSrc({ width: 500, version: "perspective" })}
+              srcSet={this.state.phonePerspective500SrcSet}
             />
             <source
               type="image/webp"
               media="(min-width: 600px)"
-              srcSet={this.getImageSrc({
-                width: 400,
-                type: "webp",
-                version: "perspective"
-              })}
+              srcSet={this.state.phonePerspective400WebpSrcSet}
             />
             <source
               media="(min-width: 600px)"
-              srcSet={this.getImageSrc({ width: 400, version: "perspective" })}
+              srcSet={this.state.phonePerspective400SrcSet}
             />
             <source
               type="image/webp"
-              srcSet={this.getImageSrc({
-                width: 300,
-                type: "webp",
-                version: "perspective"
-              })}
+              srcSet={this.state.phonePerspective300WebpSrcSet}
             />
+            <source srcSet={this.state.phonePerspective300SrcSet} />
             <img
-              src={this.getImageSrc({ width: 300, version: "perspective" })}
+              src={this.state.phonePerspective300Src}
               alt="Lazywill on a smartphone in perspective"
               style={{ opacity: mockupInPerspective ? 1 : 0 }}
             />
@@ -264,28 +341,26 @@ class Billboard extends React.Component {
             <source
               type="image/webp"
               media="(min-width: 1024px)"
-              srcSet={this.getImageSrc({ width: 500, type: "webp" })}
+              srcSet={this.state.phone500WebpSrcSet}
             />
             <source
               media="(min-width: 1024px)"
-              srcSet={this.getImageSrc({ width: 500 })}
+              srcSet={this.state.phone500SrcSet}
             />
             <source
               type="image/webp"
               media="(min-width: 600px)"
-              srcSet={this.getImageSrc({ width: 400, type: "webp" })}
+              srcSet={this.state.phone400WebpSrcSet}
             />
             <source
               media="(min-width: 600px)"
-              srcSet={this.getImageSrc({ width: 400 })}
+              srcSet={this.state.phone400SrcSet}
             />
-            <source
-              type="image/webp"
-              srcSet={this.getImageSrc({ width: 300, type: "webp" })}
-            />
+            <source type="image/webp" srcSet={this.state.phone300WebpSrcSet} />
+            <source srcSet={this.state.phone300SrcSet} />
             <img
               style={{ opacity: mockupInPerspective ? 0 : 1 }}
-              src={this.getImageSrc({ width: 300 })}
+              src={this.state.phone300Src}
               alt="Lazywill on a smartphone"
               onMouseEnter={this.handleMouseMove}
               onMouseLeave={this.handleMouseMove}
