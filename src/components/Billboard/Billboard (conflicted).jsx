@@ -103,17 +103,23 @@ const styles = theme => ({
     "@media (min-width: 1024px)": {
       width: "35%",
       "& img": {
-        maxHeight: "calc(100vh - 50px)",
-        width: "auto",
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)"
+        // maxHeight: "calc(100vh - 50px)",
+        // width: "auto",
+        // position: "absolute",
+        // top: "50%",
+        // left: "50%",
+        // transform: "translate(-50%, -50%)"
       }
     }
   },
   phone: {
     willChange: "opacity, top",
+    maxHeight: "calc(100vh - 50px)",
+    width: "auto",
+    position: "absolute",
+    top: "85%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     opacity: 0,
     animationFillMode: "forwards",
     animationTimingFunction: "ease",
@@ -142,7 +148,7 @@ const styles = theme => ({
       opacity: 1
     },
     "100%": {
-      top: "15%",
+      top: "85%",
       opacity: 0
     }
   },
@@ -189,29 +195,58 @@ class Billboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mockupInPerspective: null
+      phoneInPerspectiveVisible: null,
+      initialView: true
     };
 
     this.handleMouseClick = this.handleMouseClick.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handlePhoneImgPerspectiveLoad = this.handlePhoneImgPerspectiveLoad.bind(
+    this.handlePhoneInPerspectiveLoad = this.handlePhoneInPerspectiveLoad.bind(
       this
     );
+    this.handleWindowScroll = this.handleWindowScroll.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.phoneImgPerspective);
-    const phoneImgPerspective = this.phoneImgPerspective;
-    phoneImgPerspective.addEventListener(
+    const phoneInPerspective = this.phoneInPerspective;
+    phoneInPerspective.addEventListener(
+      "load",
+      this.handlePhoneInPerspectiveLoad
+    );
+
+    window.addEventListener("scroll", this.handleWindowScroll);
+  }
+
+  componentWillUnmount() {
+    const phoneInPerspective = this.phoneInPerspective;
+    phoneInPerspective.removeEventListener(
       "load",
       this.handlePhoneImgPerspectiveLoad
     );
+    window.removeEventListener("scroll", this.handleWindowScroll);
   }
 
-  handlePhoneImgPerspectiveLoad() {
-    console.log("img loadded");
+  handlePhoneInPerspectiveLoad() {
     this.setState({
-      mockupInPerspective: true
+      phoneInPerspectiveVisible: true
+    });
+  }
+
+  handleWindowScroll(e) {
+    const mockupTop = this.mockupSection.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    let phoneInPerspectiveVisible = true;
+    let phoneVisible = false;
+
+    if (mockupTop < windowHeight / 3) {
+      phoneInPerspectiveVisible = false;
+    } else {
+      phoneInPerspectiveVisible = true;
+    }
+
+    this.setState({
+      phoneInPerspectiveVisible: phoneInPerspectiveVisible,
+      initialView: false
     });
   }
 
@@ -231,11 +266,13 @@ class Billboard extends React.Component {
   }
 
   handleMouseMove(e) {
-    if (e.type === "mouseleave" && this.state.mockupInPerspective) {
+    if (window.innerWidth < 1024) {
       return;
     }
+
     this.setState(prevState => ({
-      mockupInPerspective: !prevState.mockupInPerspective
+      phoneInPerspectiveVisible: !prevState.phoneInPerspectiveVisible,
+      initialView: false
     }));
   }
 
@@ -258,7 +295,7 @@ class Billboard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { mockupInPerspective } = this.state;
+    const { phoneInPerspectiveVisible, initialView } = this.state;
 
     return (
       <article className={classes.container}>
@@ -283,12 +320,13 @@ class Billboard extends React.Component {
           className={classes.mockup}
           onMouseEnter={this.handleMouseMove}
           onMouseLeave={this.handleMouseMove}
+          ref={section => {
+            this.mockupSection = section;
+          }}
         >
           <div
             className={`${classes.justle} ${
-              !mockupInPerspective && mockupInPerspective !== null
-                ? "activeted"
-                : ""
+              phoneInPerspectiveVisible === false ? "activeted" : ""
             }`}
           />
           <picture>
@@ -351,10 +389,10 @@ class Billboard extends React.Component {
               })}
               alt="Lazywill on a smartphone in perspective"
               className={`${classes.phone} ${
-                mockupInPerspective ? "visible" : "hidden"
+                phoneInPerspectiveVisible === true ? "visible" : "hidden"
               }`}
               ref={img => {
-                this.phoneImgPerspective = img;
+                this.phoneInPerspective = img;
               }}
             />
           </picture>
@@ -410,13 +448,10 @@ class Billboard extends React.Component {
                 width: 300
               })}
               alt="Lazywill on a smartphone"
-              ref={img => {
-                this.phoneImg = img;
-              }}
               className={`${classes.phone} ${
-                !mockupInPerspective && mockupInPerspective !== null
-                  ? "visible"
-                  : "hidden"
+                initialView
+                  ? ""
+                  : !phoneInPerspectiveVisible ? "visible" : "hidden"
               }`}
             />
           </picture>
