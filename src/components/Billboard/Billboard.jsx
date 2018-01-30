@@ -113,10 +113,6 @@ const styles = theme => ({
       animationName: "phoneIn",
       animationDuration: ".7s"
     },
-    "&.hidden": {
-      // animationName: "phoneOut",
-      // animationDuration: ".2s"
-    },
     "@media (min-width: 1024px)": {
       maxHeight: "calc(100vh - 50px)",
       width: "auto",
@@ -174,7 +170,7 @@ const styles = theme => ({
     }
   },
   actionForMobile: {
-    padding: "0 0 3em",
+    padding: "1em 0 3em",
     textAlign: "center",
     "@media (min-width: 1024px)": {
       display: "none"
@@ -383,7 +379,7 @@ class Billboard extends React.Component {
               })}
               alt="Lazywill on a smartphone in perspective"
               className={`${classes.phone} ${
-                phoneInPerspectiveVisible === true ? "visible" : "hidden"
+                phoneInPerspectiveVisible === true ? "visible" : ""
               }`}
               ref={img => {
                 this.phoneInPerspective = img;
@@ -443,9 +439,7 @@ class Billboard extends React.Component {
               })}
               alt="Lazywill on a smartphone"
               className={`${classes.phone} ${
-                initialView
-                  ? ""
-                  : !phoneInPerspectiveVisible ? "visible" : "hidden"
+                initialView ? "" : !phoneInPerspectiveVisible ? "visible" : ""
               }`}
             />
           </picture>
