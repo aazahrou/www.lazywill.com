@@ -142,7 +142,7 @@ const styles = theme => ({
       opacity: 1
     },
     "100%": {
-      top: "85%",
+      top: "15%",
       opacity: 0
     }
   },
@@ -197,47 +197,21 @@ class Billboard extends React.Component {
     this.handlePhoneImgPerspectiveLoad = this.handlePhoneImgPerspectiveLoad.bind(
       this
     );
-    this.handleWindowScroll = this.handleWindowScroll.bind(this);
   }
 
   componentDidMount() {
+    console.log(this.phoneImgPerspective);
     const phoneImgPerspective = this.phoneImgPerspective;
     phoneImgPerspective.addEventListener(
       "load",
       this.handlePhoneImgPerspectiveLoad
     );
-
-    window.addEventListener("scroll", this.handleWindowScroll);
-  }
-
-  componentWillUnmount() {
-    const phoneImgPerspective = this.phoneImgPerspective;
-    phoneImgPerspective.removeEventListener(
-      "load",
-      this.handlePhoneImgPerspectiveLoad
-    );
-    window.removeEventListener("scroll", this.handleWindowScroll);
   }
 
   handlePhoneImgPerspectiveLoad() {
+    console.log("img loadded");
     this.setState({
       mockupInPerspective: true
-    });
-  }
-
-  handleWindowScroll(e) {
-    const mockupTop = this.mockupSection.getBoundingClientRect().top;
-    const windowHeight = window.innerHeight;
-    let mockupInPerspective = true;
-
-    if (mockupTop < windowHeight / 3) {
-      mockupInPerspective = false;
-    } else {
-      mockupInPerspective = true;
-    }
-
-    this.setState({
-      mockupInPerspective: mockupInPerspective
     });
   }
 
@@ -257,14 +231,9 @@ class Billboard extends React.Component {
   }
 
   handleMouseMove(e) {
-    if (window.innerWidth < 1024) {
-      return;
-    }
-
     if (e.type === "mouseleave" && this.state.mockupInPerspective) {
       return;
     }
-
     this.setState(prevState => ({
       mockupInPerspective: !prevState.mockupInPerspective
     }));
@@ -314,9 +283,6 @@ class Billboard extends React.Component {
           className={classes.mockup}
           onMouseEnter={this.handleMouseMove}
           onMouseLeave={this.handleMouseMove}
-          ref={section => {
-            this.mockupSection = section;
-          }}
         >
           <div
             className={`${classes.justle} ${
