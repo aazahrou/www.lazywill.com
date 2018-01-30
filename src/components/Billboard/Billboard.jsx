@@ -53,12 +53,21 @@ const styles = theme => ({
       color: "#333"
     },
     "& h1": {
-      fontSize: "1.8em",
+      fontSize: "1.9em",
+      "html.wf-active &": {
+        fontSize: "1.8em"
+      },
       "@media (min-width: 600px)": {
-        fontSize: "2.1em"
+        fontSize: "2.2em",
+        "html.wf-active &": {
+          fontSize: "2.1em"
+        }
       },
       "@media (min-width: 1024px)": {
-        fontSize: "2.4em"
+        fontSize: "2.5em",
+        "html.wf-active &": {
+          fontSize: "2.4em"
+        }
       }
     },
     "& h2": {
@@ -72,13 +81,13 @@ const styles = theme => ({
     "& em": {
       fontStyle: "normal",
       color: theme.main.green,
-      letterSpacing: "-.03em",
+      letterSpacing: "-0.03em",
       fontWeight: 400
     },
     "& strong": {
       color: theme.main.blue,
-      letterSpacing: "-.02em",
-      fontWeight: 700
+      letterSpacing: "-0.03em",
+      fontWeight: 400
     },
     "@media (min-width: 1024px)": {
       "& h1": {

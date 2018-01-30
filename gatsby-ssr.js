@@ -24,17 +24,28 @@ exports.replaceRenderer = ({
   ]);
 };
 
-exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
+exports.onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
   return setHeadComponents([
     <link
-      key={`webfontsloader-dnsprefetch`}
-      rel="dns-prefetch"
-      href="//ajax.googleapis.com/"
-    />,
-    <script
-      key={`webfontsloader`}
-      src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
-    />,
+      key={`webfontsloader-preload`}
+      rel="preload"
+      href="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
+      as="script"
+    />
+  ]);
+};
+
+exports.onRenderBody = ({ setPostBodyComponents }, pluginOptions) => {
+  return setPostBodyComponents([
+    // <link
+    //   key={`webfontsloader-dnsprefetch`}
+    //   rel="dns-prefetch"
+    //   href="//ajax.googleapis.com/"
+    // />,
+    // <script
+    //   key={`webfontsloader`}
+    //   src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
+    // />,
     <script
       key={`webfontsloader-setup`}
       dangerouslySetInnerHTML={{

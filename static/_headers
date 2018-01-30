@@ -1,9 +1,14 @@
 ## Created with gatsby-plugin-netlify
 
 /*
-  ## Cache-Control: public, max-age=3600, must-revalidate
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
+/
+  Cache-Control: public, max-age=0, must-revalidate 
+/*.js
+  Cache-Content: public, max-age=31536000, stale-while-revalidate=2592000
 /static/*
   Cache-Control: max-age=31536000
+
+ 
