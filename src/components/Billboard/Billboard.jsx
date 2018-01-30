@@ -150,7 +150,7 @@ const styles = theme => ({
     margin: "0 auto",
     transition: "all 1s",
     backgroundImage:
-      "radial-gradient(rgba(255,255,255,0.6) 30%, transparent 60%)",
+      "radial-gradient(rgba(255,255,255,0.6) 30%, rgba(255,255,255,0) 60%)",
     opacity: 0,
     "&.activeted": {
       opacity: 1
@@ -228,7 +228,7 @@ class Billboard extends React.Component {
     let phoneInPerspectiveVisible = true;
     let phoneVisible = false;
 
-    if (mockupTop < windowHeight / 3) {
+    if (mockupTop < windowHeight / 4) {
       phoneInPerspectiveVisible = false;
     } else {
       phoneInPerspectiveVisible = true;
