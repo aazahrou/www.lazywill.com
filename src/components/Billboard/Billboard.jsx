@@ -147,11 +147,27 @@ class Billboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mockupInPerspective: true
+      mockupInPerspective: null
     };
 
     this.handleMouseClick = this.handleMouseClick.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
+    this.handlePhoneImgPerspectiveLoad = this.handlePhoneImgPerspectiveLoad.bind(
+      this
+    );
+  }
+
+  componentDidMount() {
+    console.log(this.phoneImgPerspective);
+    const phoneImgPerspective = this.phoneImgPerspective;
+    phoneImgPerspective.addEventListener(
+      "load",
+      this.handlePhoneImgPerspectiveLoad
+    );
+  }
+
+  handlePhoneImgPerspectiveLoad() {
+    console.log("img loadded");
   }
 
   handleMouseClick(e) {
@@ -280,6 +296,10 @@ class Billboard extends React.Component {
               })}
               alt="Lazywill on a smartphone in perspective"
               style={{ opacity: mockupInPerspective ? 1 : 0 }}
+              ref={img => {
+                this.phoneImgPerspective = img;
+              }}
+            />
             />
           </picture>
           <picture>
@@ -333,11 +353,17 @@ class Billboard extends React.Component {
               src={this.getImageSrc({
                 width: 300
               })}
-              style={{ opacity: mockupInPerspective ? 0 : 1 }}
+              style={{
+                opacity:
+                  !mockupInPerspective && mockupInPerspective !== null ? 1 : 0
+              }}
               alt="Lazywill on a smartphone"
               onMouseEnter={this.handleMouseMove}
               onMouseLeave={this.handleMouseMove}
               onClick={this.handleMouseMove}
+              ref={img => {
+                this.phoneImg = img;
+              }}
             />
           </picture>
         </section>
