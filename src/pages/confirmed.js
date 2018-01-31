@@ -1,5 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
+import PropTypes from "prop-types";
+
 const config = require("../../utils/config");
 
 import SvgEl from "../components/shared/SvgEl";
@@ -29,7 +31,7 @@ const styles = theme => ({
   }
 });
 
-class Index extends React.Component {
+class Confirmed extends React.Component {
   componentWillMount() {}
 
   render() {
@@ -65,4 +67,8 @@ class Index extends React.Component {
   }
 }
 
-export default injectSheet(styles)(Index);
+Confirmed.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default injectSheet(styles)(Confirmed);

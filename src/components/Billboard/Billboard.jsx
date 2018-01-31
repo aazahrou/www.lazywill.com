@@ -1,5 +1,6 @@
 import React from "react";
 import injectSheet from "react-jss";
+import PropTypes from "prop-types";
 import "mdn-polyfills/Array.prototype.find";
 
 import SvgEl from "../shared/SvgEl";
@@ -460,5 +461,10 @@ class Billboard extends React.Component {
     );
   }
 }
+
+Billboard.propTypes = {
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired
+};
 
 export default injectSheet(styles)(Billboard);

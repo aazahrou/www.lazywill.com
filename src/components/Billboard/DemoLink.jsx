@@ -47,7 +47,8 @@ const BlockButton = props => {
 };
 
 BlockButton.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(BlockButton);

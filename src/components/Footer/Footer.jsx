@@ -1,6 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
 import Obfuscate from "react-obfuscate";
+import PropTypes from "prop-types";
 
 const styles = theme => ({
   footer: {
@@ -101,6 +102,10 @@ const Footer = ({ classes }) => {
       </div>
     </footer>
   );
+};
+
+Footer.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default injectSheet(styles)(Footer);

@@ -1,5 +1,7 @@
 import React from "react";
 import injectSheet from "react-jss";
+import PropTypes from "prop-types";
+
 const config = require("../../utils/config");
 
 import Billboard from "../components/Billboard/";
@@ -28,7 +30,7 @@ const styles = theme => ({
 
 class Index extends React.Component {
   render() {
-    const { classes } = this.props;
+    const { classes, data } = this.props;
 
     return (
       <div className={classes.main}>
@@ -37,26 +39,26 @@ class Index extends React.Component {
             <source
               type="image/webp"
               media="(min-width: 1024px)"
-              srcSet={this.props.data.background2000Webp.resize.src}
+              srcSet={data.background2000Webp.resize.src}
             />
             <source
               media="(min-width: 1024px)"
-              srcSet={this.props.data.background2000.resize.src}
+              srcSet={data.background2000.resize.src}
             />
             <source
               type="image/webp"
               media="(min-width: 600px)"
-              srcSet={this.props.data.background1000Webp.resize.src}
+              srcSet={data.background1000Webp.resize.src}
             />
             <source
               media="(min-width: 600px)"
-              srcSet={this.props.data.background1000.resize.src}
+              srcSet={data.background1000.resize.src}
             />
             <source
               type="image/webp"
-              srcSet={this.props.data.background500Webp.resize.src}
+              srcSet={data.background500Webp.resize.src}
             />
-            <img src={this.props.data.background500.resize.src} alt="" />
+            <img src={data.background500.resize.src} alt="" />
           </picture>
         </div>
         <Billboard data={this.props.data} />
@@ -65,6 +67,11 @@ class Index extends React.Component {
     );
   }
 }
+
+Index.propTypes = {
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired
+};
 
 export default injectSheet(styles)(Index);
 
