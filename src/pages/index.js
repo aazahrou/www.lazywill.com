@@ -2,11 +2,10 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
-const config = require("../../utils/config");
-
 import Billboard from "../components/Billboard/";
 import Footer from "../components/Footer/";
 
+// eslint-disable-next-line no-unused-vars
 const styles = theme => ({
   main: {
     width: "100%",
@@ -41,23 +40,14 @@ class Index extends React.Component {
               media="(min-width: 1024px)"
               srcSet={data.background2000Webp.resize.src}
             />
-            <source
-              media="(min-width: 1024px)"
-              srcSet={data.background2000.resize.src}
-            />
+            <source media="(min-width: 1024px)" srcSet={data.background2000.resize.src} />
             <source
               type="image/webp"
               media="(min-width: 600px)"
               srcSet={data.background1000Webp.resize.src}
             />
-            <source
-              media="(min-width: 600px)"
-              srcSet={data.background1000.resize.src}
-            />
-            <source
-              type="image/webp"
-              srcSet={data.background500Webp.resize.src}
-            />
+            <source media="(min-width: 600px)" srcSet={data.background1000.resize.src} />
+            <source type="image/webp" srcSet={data.background500Webp.resize.src} />
             <img src={data.background500.resize.src} alt="" />
           </picture>
         </div>
@@ -75,11 +65,10 @@ Index.propTypes = {
 
 export default injectSheet(styles)(Index);
 
+// eslint-disable-next-line no-undef
 export const pageQuery = graphql`
   query IndexQuery {
-    phone300: allImageSharp(
-      filter: { id: { regex: "/phone(-perspective)*.png/" } }
-    ) {
+    phone300: allImageSharp(filter: { id: { regex: "/phone(-perspective)*.png/" } }) {
       edges {
         node {
           ... on ImageSharp {
@@ -96,9 +85,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    phone400: allImageSharp(
-      filter: { id: { regex: "/phone(-perspective)*.png/" } }
-    ) {
+    phone400: allImageSharp(filter: { id: { regex: "/phone(-perspective)*.png/" } }) {
       edges {
         node {
           ... on ImageSharp {
@@ -115,9 +102,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    phone500: allImageSharp(
-      filter: { id: { regex: "/phone(-perspective)*.png/" } }
-    ) {
+    phone500: allImageSharp(filter: { id: { regex: "/phone(-perspective)*.png/" } }) {
       edges {
         node {
           ... on ImageSharp {
@@ -150,35 +135,17 @@ export const pageQuery = graphql`
       }
     }
     background500Webp: imageSharp(id: { regex: "/background.jpg/" }) {
-      resize(
-        width: 500
-        height: 1500
-        toFormat: WEBP
-        quality: 90
-        cropFocus: SOUTHWEST
-      ) {
+      resize(width: 500, height: 1500, toFormat: WEBP, quality: 90, cropFocus: SOUTHWEST) {
         src
       }
     }
     background1000Webp: imageSharp(id: { regex: "/background.jpg/" }) {
-      resize(
-        width: 1000
-        height: 1500
-        toFormat: WEBP
-        quality: 90
-        cropFocus: SOUTHWEST
-      ) {
+      resize(width: 1000, height: 1500, toFormat: WEBP, quality: 90, cropFocus: SOUTHWEST) {
         src
       }
     }
     background2000Webp: imageSharp(id: { regex: "/background.jpg/" }) {
-      resize(
-        width: 2000
-        height: 1500
-        toFormat: WEBP
-        quality: 90
-        cropFocus: SOUTHWEST
-      ) {
+      resize(width: 2000, height: 1500, toFormat: WEBP, quality: 90, cropFocus: SOUTHWEST) {
         src
       }
     }

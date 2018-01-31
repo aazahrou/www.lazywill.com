@@ -4,8 +4,23 @@ import PropTypes from "prop-types";
 import "mdn-polyfills/Array.prototype.find";
 
 import SvgEl from "../shared/SvgEl";
-import { LOGOS } from "../../../utils/logos";
+import LOGOS from "../../../utils/logos";
 import DemoLink from "./DemoLink";
+
+function handleMouseClick() {
+  if (typeof ga === `function`) {
+    window.ga("send", {
+      hitType: "event",
+      eventCategory: "cta",
+      eventAction: "click",
+      eventLabel: "Try Demo"
+    });
+  }
+
+  setTimeout(() => {
+    document.location.href = "https://demo.lazywill.com";
+  }, 200);
+}
 
 const styles = theme => ({
   container: {
@@ -102,9 +117,7 @@ const styles = theme => ({
     overflow: "hidden",
     "& img": {
       maxWidth: "100%",
-      transition: "all .5s"
-    },
-    "& img": {
+      transition: "all .5s",
       position: "absolute",
       top: "50%",
       left: "50%",
@@ -159,8 +172,7 @@ const styles = theme => ({
     position: "relative",
     margin: "0 auto",
     transition: "all 1s",
-    backgroundImage:
-      "radial-gradient(rgba(255,255,255,0.6) 30%, rgba(255,255,255,0) 60%)",
+    backgroundImage: "radial-gradient(rgba(255,255,255,0.6) 30%, rgba(255,255,255,0) 60%)",
     opacity: 0,
     "&.activeted": {
       opacity: 1
@@ -199,30 +211,20 @@ class Billboard extends React.Component {
       initialView: true
     };
 
-    this.handleMouseClick = this.handleMouseClick.bind(this);
     this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.handlePhoneInPerspectiveLoad = this.handlePhoneInPerspectiveLoad.bind(
-      this
-    );
+    this.handlePhoneInPerspectiveLoad = this.handlePhoneInPerspectiveLoad.bind(this);
     this.handleWindowScroll = this.handleWindowScroll.bind(this);
   }
 
   componentDidMount() {
     const phoneInPerspective = this.phoneInPerspective;
-    phoneInPerspective.addEventListener(
-      "load",
-      this.handlePhoneInPerspectiveLoad
-    );
-
+    phoneInPerspective.addEventListener("load", this.handlePhoneInPerspectiveLoad);
     window.addEventListener("scroll", this.handleWindowScroll);
   }
 
   componentWillUnmount() {
     const phoneInPerspective = this.phoneInPerspective;
-    phoneInPerspective.removeEventListener(
-      "load",
-      this.handlePhoneImgPerspectiveLoad
-    );
+    phoneInPerspective.removeEventListener("load", this.handlePhoneInPerspectiveLoad);
     window.removeEventListener("scroll", this.handleWindowScroll);
   }
 
@@ -232,11 +234,10 @@ class Billboard extends React.Component {
     });
   }
 
-  handleWindowScroll(e) {
+  handleWindowScroll() {
     const mockupTop = this.mockupSection.getBoundingClientRect().top;
     const windowHeight = window.innerHeight;
     let phoneInPerspectiveVisible = true;
-    let phoneVisible = false;
 
     if (mockupTop < windowHeight / 4) {
       phoneInPerspectiveVisible = false;
@@ -245,27 +246,12 @@ class Billboard extends React.Component {
     }
 
     this.setState({
-      phoneInPerspectiveVisible: phoneInPerspectiveVisible,
+      phoneInPerspectiveVisible,
       initialView: false
     });
   }
 
-  handleMouseClick(e) {
-    if (typeof ga === `function`) {
-      window.ga("send", {
-        hitType: "event",
-        eventCategory: "cta",
-        eventAction: "click",
-        eventLabel: "Try Demo"
-      });
-    }
-
-    setTimeout(() => {
-      document.location.href = "https://demo.lazywill.com";
-    }, 200);
-  }
-
-  handleMouseMove(e) {
+  handleMouseMove() {
     if (window.innerWidth < 1024) {
       return;
     }
@@ -283,8 +269,6 @@ class Billboard extends React.Component {
     const srcType = srcSet ? "srcSet" : "src";
     const fileType = type === "webp" ? "Webp" : "";
     const imgWidth = width ? width.toString() : "300";
-    const fileName =
-      version === "perspective" ? "phone-perspective.png" : "phone.png";
 
     return data[`phone${imgWidth}`].edges.find(
       el =>
@@ -305,15 +289,13 @@ class Billboard extends React.Component {
           </span>
           <header className={classes.header}>
             <h1>
-              A vocabulary training web app for language learners like you,{" "}
-              <em>declared</em> <strong>visual learners</strong>.
+              A vocabulary training web app for language learners like you, <em>declared</em>{" "}
+              <strong>visual learners</strong>.
             </h1>
-            <h2>
-              If you are a visual learner type the app is definitely for you
-            </h2>
+            <h2>If you are a visual learner type the app is definitely for you</h2>
           </header>
           <div className={classes.actionForDesktop}>
-            <DemoLink onClick={this.handleMouseClick} />
+            <DemoLink onClick={handleMouseClick} />
           </div>
         </section>
         <section
@@ -388,9 +370,7 @@ class Billboard extends React.Component {
                 version: "perspective"
               })}
               alt="Lazywill on a smartphone in perspective"
-              className={`${classes.phone} ${
-                phoneInPerspectiveVisible === true ? "visible" : ""
-              }`}
+              className={`${classes.phone} ${phoneInPerspectiveVisible === true ? "visible" : ""}`}
               ref={img => {
                 this.phoneInPerspective = img;
               }}
@@ -455,7 +435,7 @@ class Billboard extends React.Component {
           </picture>
         </section>
         <section className={classes.actionForMobile}>
-          <DemoLink onClick={this.handleMouseClick} />
+          <DemoLink onClick={handleMouseClick} />
         </section>
       </article>
     );

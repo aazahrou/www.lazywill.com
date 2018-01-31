@@ -1,5 +1,6 @@
-const colors = require("./colors");
 import { createMuiTheme } from "material-ui/styles";
+
+const colors = require("./colors");
 
 const theme = createMuiTheme({
   main: {

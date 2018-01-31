@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const SvgEl = props => {
   return (
@@ -14,6 +15,13 @@ const SvgEl = props => {
       {props.svg.path}
     </svg>
   );
+};
+
+SvgEl.propTypes = {
+  svg: PropTypes.shape({
+    viewBox: PropTypes.string,
+    path: PropTypes.node
+  }).isRequired
 };
 
 export default SvgEl;

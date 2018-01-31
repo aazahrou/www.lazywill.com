@@ -59,18 +59,18 @@ const Footer = ({ classes }) => {
       <div className={classes.column}>
         <span>
           Built with{" "}
-          <a href="https://reactjs.org/" target="_blank" rel="noopener">
+          <a href="https://reactjs.org/" target="_blank" rel="noopener noreferrer">
             React
           </a>{" "}
           &{" "}
-          <a href="https://www.gatsbyjs.org/" target="_blank" rel="noopener">
+          <a href="https://www.gatsbyjs.org/" target="_blank" rel="noopener noreferrer">
             Gatsby
           </a>
         </span>{" "}
         <b>|</b>{" "}
         <span>
           Hosted on{" "}
-          <a href="https://www.netlify.com/" target="_blank" rel="noopener">
+          <a href="https://www.netlify.com/" target="_blank" rel="noopener noreferrer">
             Netlify
           </a>
         </span>
@@ -80,21 +80,21 @@ const Footer = ({ classes }) => {
           <a
             href="https://www.flickr.com/photos/22746515@N02/7525640086/"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             Picture
           </a>,{" "}
           <a
             href="http://creativecrunk.com/google-pixel-psd-mockup/"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             Phone
           </a>{" "}
           <a
             href="http://creativecrunk.com/google-pixel-psd-mockup-2/"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             Mockups
           </a>

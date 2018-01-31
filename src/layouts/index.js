@@ -1,20 +1,16 @@
+import normalize from "normalize-jss";
+
 import React from "react";
-import Helmet from "react-helmet";
 import injectSheet from "react-jss";
 import { MuiThemeProvider } from "material-ui/styles";
-
+import PropTypes from "prop-types";
 import theme from "../styles/theme";
-import normalize from "normalize-jss";
 import globals from "../styles/globals";
 import SEO from "../components/shared/SEO";
 
 class Template extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const { location, children } = this.props;
+    const { children } = this.props;
 
     return (
       <MuiThemeProvider theme={theme}>
@@ -26,5 +22,10 @@ class Template extends React.Component {
     );
   }
 }
+
+Template.propTypes = {
+  classes: PropTypes.object.isRequired,
+  children: PropTypes.func.isRequired
+};
 
 export default injectSheet(normalize)(injectSheet(globals)(Template));

@@ -2,11 +2,10 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 
-const config = require("../../utils/config");
-
 import SvgEl from "../components/shared/SvgEl";
-import { LOGOS } from "../../utils/logos";
+import LOGOS from "../../utils/logos";
 
+// eslint-disable-next-line no-unused-vars
 const styles = theme => ({
   main: {
     width: "100%",
@@ -32,8 +31,6 @@ const styles = theme => ({
 });
 
 class Confirmed extends React.Component {
-  componentWillMount() {}
-
   render() {
     const { classes } = this.props;
 
@@ -43,19 +40,12 @@ class Confirmed extends React.Component {
           <span className={classes.logo}>
             <SvgEl svg={LOGOS.MAIN} />
           </span>
+          <p>Thank you, you have just confirmed your Lazywill Newsletter subscription.</p>
           <p>
-            Thank you, you have just confirmed your Lazywill Newsletter
-            subscription.
+            You will be able to cancel it at any time. There will be an unsubscribe link in any of
+            my messages to you.
           </p>
-          <p>
-            You will be able to cancel it at any time. There will be an
-            unsubscribe link in any of my messages to you.
-          </p>
-          <p>
-            {" "}
-            If you have any questions, feel free to contact me at
-            hello@lazywill.com.
-          </p>
+          <p> If you have any questions, feel free to contact me at hello@lazywill.com.</p>
           <p>
             {" "}
             We are in touch <br />

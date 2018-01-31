@@ -1,7 +1,6 @@
 import React from "react";
 import { withStyles } from "material-ui/styles";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 import Phonelink from "material-ui-icons/Phonelink";
 import Button from "material-ui/Button";
@@ -34,21 +33,18 @@ const styles = theme => ({
   }
 });
 
-const BlockButton = props => {
-  const { classes, children, onClick } = props;
+const DemoLink = props => {
+  const { classes, onClick } = props;
   return (
-    <Button
-      onClick={onClick}
-      classes={{ root: classes.root, label: classes.label }}
-    >
+    <Button onClick={onClick} classes={{ root: classes.root, label: classes.label }}>
       Try demo&nbsp; <Phonelink />
     </Button>
   );
 };
 
-BlockButton.propTypes = {
+DemoLink.propTypes = {
   classes: PropTypes.object.isRequired,
   onClick: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(BlockButton);
+export default withStyles(styles)(DemoLink);
