@@ -32,7 +32,7 @@ class Index extends React.Component {
     const { classes, data } = this.props;
 
     return (
-      <div className={classes.main}>
+      <main className={classes.main}>
         <div className={classes.bg}>
           <picture>
             <source
@@ -53,7 +53,7 @@ class Index extends React.Component {
         </div>
         <Billboard data={this.props.data} />
         <Footer />
-      </div>
+      </main>
     );
   }
 }

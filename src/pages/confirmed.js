@@ -35,7 +35,7 @@ class Confirmed extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.main}>
+      <main className={classes.main}>
         <div className={classes.box}>
           <span className={classes.logo}>
             <SvgEl svg={LOGOS.MAIN} />
@@ -52,7 +52,7 @@ class Confirmed extends React.Component {
             <b>Will</b>
           </p>
         </div>
-      </div>
+      </main>
     );
   }
 }
