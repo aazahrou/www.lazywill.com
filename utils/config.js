@@ -4,7 +4,7 @@ module.exports = {
   pathPrefix: "/",
   appName: "Lazywill",
   siteTitle: "Lazywill - a vocabulary training app for language learners",
-  siteUrl: "https://gsbs.greglobinski.com",
+  siteUrl: "https://www.lazywill.com",
   siteLanguage: "en",
   siteLogo: "/logos/logo-1024.png",
   siteImage: "/logos/logo-1024.png",
